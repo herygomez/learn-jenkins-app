@@ -41,13 +41,14 @@ pipeline {
                 docker{
                     image 'mcr.microsoft.com/playwright:v1.51.1-noble'
                     reuseNode true
+                    args "-u "
                 }
             }
             steps{
                 sh '''
-                    npm install -g serve
-                    serve -s build
-                    npm playwright test
+                    npm install serve
+                    node_modules/.bin/serve -s build
+                    npx playwright test
                 '''
             }
         }
